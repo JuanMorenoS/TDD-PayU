@@ -19,4 +19,13 @@ class ChristmasLightsTest {
         val counter = cl.countLightsOn()
         assertEquals(1, counter)
     }
+
+    @Test
+    fun `One light is on when turning on the same point`() {
+        val cl = ChristmasLights(1000, 1000)
+        cl.turnOn((0 to 0), (0 to 1))
+        cl.turnOn((0 to 0), (0 to 1))
+        val counter = cl.countLightsOn()
+        assertEquals(1, counter)
+    }
 }
