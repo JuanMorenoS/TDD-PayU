@@ -1,3 +1,4 @@
+import junit.framework.Assert.*
 import org.junit.Test
 
 class ChristmasLightsTest{
@@ -6,4 +7,14 @@ class ChristmasLightsTest{
     fun compileProject(){
 
     }
+
+    @Test
+    fun shouldStartWithZeroLightsOn() {
+        val cl = ChristmasLights()
+
+        val lightsOn = cl.countLightsOn()
+
+        assertEquals(0, lightsOn)
+    }
+
 }
