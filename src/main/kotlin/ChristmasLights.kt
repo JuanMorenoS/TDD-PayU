@@ -10,12 +10,12 @@ class ChristmasLights(private val width: Int, private val height: Int) {
 
     fun turnOn(start: Pair<Int, Int>, finish: Pair<Int, Int>) {
 
-        val row = start.first..finish.first
-        val column = start.second..finish.second
+        val rows = start.first..finish.first
+        val columns = start.second..finish.second
 
-        row.forEach { x ->
-            column.forEach { y ->
-                lights[x][y] = true
+        rows.forEach { row ->
+            columns.forEach { column ->
+                lights[row][column] = true
             }
         }
     }
