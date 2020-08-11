@@ -26,7 +26,7 @@ class ChristmasLightsTest {
         cl.turnOn((0 to 0), (0 to 0))
         cl.turnOn((0 to 0), (0 to 0))
         val counter = cl.countLightsOn()
-        assertEquals(1, counter)
+        assertEquals(2, counter)
     }
 
     @Test
@@ -60,7 +60,14 @@ class ChristmasLightsTest {
         val lights = buildLights()
         lights.turnOn((101 to 101), (300 to 300)) // 200x200
         lights.toggle((201 to 201), (400 to 400)) // (200x200-100x100) + (3x100x100) == 60_000
-        assertEquals(60_000, lights.countLightsOn())
+        assertEquals(120_000, lights.countLightsOn())
+    }
+
+    @Test
+    fun `turn off light with brightness 0 should not change brightness`() {
+        val lights = buildLights()
+        lights.turnOff((0 to 0), (100 to 100))
+        assertEquals(0, lights.countLightsOn())
     }
 
     private fun buildLights() = ChristmasLights(1000, 1000)
