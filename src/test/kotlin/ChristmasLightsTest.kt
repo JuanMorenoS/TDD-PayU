@@ -1,4 +1,5 @@
-import junit.framework.Assert.*
+import junit.framework.Assert.assertEquals
+import junit.framework.Assert.fail
 import org.junit.Test
 
 class ChristmasLightsTest {
@@ -39,7 +40,7 @@ class ChristmasLightsTest {
     }
 
     @Test
-    fun `lights should be off when calling turnOff method`(){
+    fun `lights should be off when calling turnOff method`() {
         val lights = buildLights()
         lights.turnOn((0 to 0), (0 to 1))
         lights.turnOff((0 to 0), (0 to 1))
@@ -47,7 +48,7 @@ class ChristmasLightsTest {
     }
 
     @Test
-    fun `intersection should be off after turnOff`(){
+    fun `intersection should be off after turnOff`() {
 
         val lights = buildLights()
         lights.turnOn((1 to 1), (100 to 100))
@@ -67,6 +68,32 @@ class ChristmasLightsTest {
     fun `turn off light with brightness 0 should not change brightness`() {
         val lights = buildLights()
         lights.turnOff((0 to 0), (100 to 100))
+        assertEquals(0, lights.countLightsOn())
+    }
+
+    @Test
+    fun `should be 0 when we turn off two times after toggle`() {
+        val lights = buildLights()
+        lights.toggle((0 to 0), (999 to 999))
+        lights.turnOff((0 to 0), (999 to 999))
+        lights.turnOff((0 to 0), (999 to 999))
+        assertEquals(0, lights.countLightsOn())
+    }
+
+    @Test(expected = ChristmasLights.BadInputException::class)
+    fun `should return an exception when the range is bad`() {
+        val lights = buildLights()
+        lights.turnOn((800 to 800), (1000 to 1000))
+    }
+
+    @Test
+    fun `should not turn on a light when an exception was throw`() {
+        val lights = buildLights()
+        try {
+            lights.turnOn((800 to 800), (1000 to 1000))
+            fail()
+        }catch (exception: ChristmasLights.BadInputException){
+        }
         assertEquals(0, lights.countLightsOn())
     }
 
