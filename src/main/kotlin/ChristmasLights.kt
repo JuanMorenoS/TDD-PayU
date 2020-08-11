@@ -21,6 +21,9 @@ class ChristmasLights(private val width: Int, private val height: Int) {
         if (start.first >= width || finish.first >= width || start.second >= height || finish.second >= height) {
             throw BadInputException()
         }
+
+        if(start.first > finish.first || start.second > finish.second)
+            throw BadInputException()
     }
 
     fun turnOff(start: Pair<Int, Int>, finish: Pair<Int, Int>) {

@@ -92,9 +92,15 @@ class ChristmasLightsTest {
         try {
             lights.turnOn((800 to 800), (1000 to 1000))
             fail()
-        }catch (exception: ChristmasLights.BadInputException){
+        } catch (exception: ChristmasLights.BadInputException) {
         }
         assertEquals(0, lights.countLightsOn())
+    }
+
+    @Test(expected = ChristmasLights.BadInputException::class)
+    fun `should throw exception when turnOn width bad requirements`() {
+        val lights = buildLights()
+        lights.turnOn((800 to 800), (900 to 700))
     }
 
     private fun buildLights() = ChristmasLights(1000, 1000)
