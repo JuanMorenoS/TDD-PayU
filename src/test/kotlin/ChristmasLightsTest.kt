@@ -46,5 +46,14 @@ class ChristmasLightsTest {
         assertEquals(0, lights.countLightsOn())
     }
 
+    @Test
+    fun `intersection should be off after turnOff`(){
+
+        val lights = buildLights()
+        lights.turnOn((1 to 1), (100 to 100))
+        lights.turnOff((1 to 1), (50 to 100))
+        assertEquals(5000, lights.countLightsOn())
+    }
+
     private fun buildLights() = ChristmasLights(1000, 1000)
 }
