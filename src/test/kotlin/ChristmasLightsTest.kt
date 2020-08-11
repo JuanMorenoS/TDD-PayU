@@ -55,5 +55,13 @@ class ChristmasLightsTest {
         assertEquals(5000, lights.countLightsOn())
     }
 
+    @Test
+    fun `toggle should invert the light state`() {
+        val lights = buildLights()
+        lights.turnOn((101 to 101), (300 to 300)) // 200x200
+        lights.toggle((201 to 201), (400 to 400)) // (200x200-100x100) + (3x100x100) == 60_000
+        assertEquals(60_000, lights.countLightsOn())
+    }
+
     private fun buildLights() = ChristmasLights(1000, 1000)
 }
